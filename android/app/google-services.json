@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "8903588731",
+    "project_id": "masrofaty-6f0cb",
+    "storage_bucket": "masrofaty-6f0cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8903588731:android:787b8d8c54fbd6232a1bde",
+        "android_client_info": {
+          "package_name": "com.mohaa.masrofaty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOZ2fIkqS2PcxjjugXB4Sk6Ya1wsdcV88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
