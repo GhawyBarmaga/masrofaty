@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 
 
@@ -25,7 +27,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool ischecked = false;
-  
+  final localstorage = GetStorage();
   bool issecure = true;
   bool isloading = false;
   TextEditingController email = TextEditingController();
@@ -38,7 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-   
+    email.text = localstorage.read("email") ?? "";
+    password.text = localstorage.read("password") ?? "";
    
     isloading = false;
     super.initState();
@@ -61,7 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         if (email.isNotEmpty || password.isNotEmpty) {
           
-
+          if (ischecked == true) {
+            localstorage.write("email", email.trim());
+            localstorage.write("password", password.trim());
+          }
           isloading = true;
           setState(() {});
           // logging in user with email and password
@@ -136,7 +142,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           issecure ? Icons.visibility_off : Icons.visibility),
                     )),
               ),
-             
+              Row(
+                children: [
+                  const Spacer(),
+                  Checkbox(
+                      activeColor: HexColor("8a2be2"),
+                      checkColor: Colors.white,
+                      side: const BorderSide(color: Colors.black),
+                      value: ischecked,
+                      onChanged: (value) {
+                        ischecked = !ischecked;
+                        setState(() {});
+                      }),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "تذكرني",
+                      style: TextStyle(
+                          color: Colors.deepPurple,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 10.0),
               SizedBox(
                 width: Get.width * 0.8,
