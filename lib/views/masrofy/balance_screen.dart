@@ -8,7 +8,6 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../controller/masrofy.dart';
 import '../../shared/components.dart';
 
-
 class BalanceScreen extends StatelessWidget {
   const BalanceScreen({
     super.key,

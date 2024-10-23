@@ -15,6 +15,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../shared/components.dart';
 
+import '../shared/foregetpass.dart';
 import '../views/masrofy/masrofy_screen.dart';
 import 'register_screen.dart';
 
@@ -144,6 +145,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Row(
                 children: [
+                    TextButton(
+                      onPressed: () {
+                        Get.to(() => const ForgotPasswordScreen());
+                      },
+                      child: const Text(
+                        "اعادة تعيين كلمة المرور",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )),
                   const Spacer(),
                   Checkbox(
                       activeColor: HexColor("8a2be2"),

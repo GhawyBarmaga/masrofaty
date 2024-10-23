@@ -94,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           // Get.snackbar("👍", "تم التسجيل بنجاح",
           //     backgroundColor: Colors.white, colorText: Colors.red);
 
-          Get.offAll(() => const BalanceScreen());
+          Get.offAll(() => const LoginScreen());
         } else {
           Get.snackbar("😒", "تأكد من ملىء جميع الخانات",
               backgroundColor: Colors.white, colorText: Colors.red);
