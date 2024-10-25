@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 
-
 import '../shared/components.dart';
 import 'login_screen.dart';
 
@@ -25,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController password = TextEditingController();
 
   TextEditingController username = TextEditingController();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final DateTime now = DateTime.now();
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
@@ -125,14 +125,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             padding: EdgeInsets.only(top: Get.height * .15, left: 15),
             decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-              HexColor("666666"),
-              HexColor("333333"),
-              HexColor("101010")
+              HexColor("2B5876"),
+              HexColor("4E4376"),
             ])),
             //child: Lottie.asset("assets/animations/login.json.json"),
-            child: Text(
-              "👋مرحبا بك".tr,
-              style: const TextStyle(
+            child: const Text(
+              " 🙌",
+              style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
                   color: Colors.white),
@@ -148,92 +147,116 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40))),
-            child: Column(children: [
-              const SizedBox(
-                height: 30.0,
-              ),
-              CustomForm(
-                text: "ادخل اسمك".tr,
-                type: TextInputType.name,
-                name: username,
-                sufxicon: const Icon(Icons.person),
-              ),
-              const SizedBox(
-                height: 30.0,
-              ),
-              CustomForm(
-                text: "ادخل ايميلك".tr,
-                type: TextInputType.emailAddress,
-                name: emailaddress,
-                sufxicon: const Icon(Icons.email),
-              ),
-              const SizedBox(
-                height: 30.0,
-              ),
-              CustomPass(
-                  text: "ادخل كلمة المرور".tr,
-                  type: TextInputType.visiblePassword,
-                  issecure: issecure,
-                  name: password,
-                  sufxicon: InkWell(
-                    onTap: () {
-                      issecure = !issecure;
-                      setState(() {});
-                    },
-                    child: Icon(
-                        issecure ? Icons.visibility_off : Icons.visibility),
-                  )),
-              const SizedBox(
-                height: 30.0,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    signupUser(
-                        email: emailaddress.text,
-                        password: password.text,
-                        name: username.text);
+            child: Form(
+              key: formkey,
+              child: Column(children: [
+                const SizedBox(
+                  height: 30.0,
+                ),
+                CustomForm(
+                  validator: (validator) {
+                    if (validator!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
                   },
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            HexColor("666666"),
-                            HexColor("333333"),
-                            HexColor("101010")
-                          ]),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Center(
-                          child: isloading
-                              ? const Center(child: CircularProgressIndicator())
-                              : Center(
-                                  child: Text(
-                                  "تسجيل الدخول".tr,
-                                  style: const TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white),
-                                ))))),
-              const SizedBox(
-                height: 30.0,
-              ),
-              Row(
-                children: [
-                  Center(
-                      child: Text(
-                    "لديك حساب بالفعل؟".tr,
-                    style: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
-                  )),
-                  TextButton(
-                      onPressed: () {
-                        Get.to(() => const LoginScreen());
+                  text: "Your Name ",
+                  type: TextInputType.name,
+                  name: username,
+                  sufxicon: const Icon(Icons.person),
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                CustomForm(
+                  validator: (validator) {
+                    if (validator!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
+                  },
+                  text: "Your Email",
+                  type: TextInputType.emailAddress,
+                  name: emailaddress,
+                  sufxicon: const Icon(Icons.email),
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                CustomPass(
+                    validator: (validator) {
+                      if (validator!.isEmpty) {
+                        return "Required field";
+                      }
+                      return null;
+                    },
+                    text: " Your Password",
+                    type: TextInputType.visiblePassword,
+                    issecure: issecure,
+                    name: password,
+                    sufxicon: InkWell(
+                      onTap: () {
+                        issecure = !issecure;
+                        setState(() {});
                       },
-                      child: Text("تسجيل الدخول".tr,
-                          style: const TextStyle(fontWeight: FontWeight.bold)))
-                ],
-              ),
-            ]),
+                      child: Icon(
+                          issecure ? Icons.visibility_off : Icons.visibility),
+                    )),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      if (formkey.currentState!.validate()) {
+                        signupUser(
+                            email: emailaddress.text,
+                            password: password.text,
+                            name: username.text);
+                      }
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              HexColor("2B5876"),
+                              HexColor("4E4376"),
+                            ]),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Center(
+                            child: isloading
+                                ? const Center(
+                                    child: CircularProgressIndicator())
+                                : const Center(
+                                    child: Text(
+                                    " Register",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
+                                  ))))),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                Row(
+                  children: [
+                    const Center(
+                        child: Text(
+                      "Already have an account?",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    )),
+                    TextButton(
+                        onPressed: () {
+                          Get.to(() => const LoginScreen());
+                        },
+                        child: const Text("Login ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18)))
+                  ],
+                ),
+              ]),
+            ),
           )
         ]),
       ),
