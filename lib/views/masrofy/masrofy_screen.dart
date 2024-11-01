@@ -122,6 +122,7 @@ class MasrofyScreen extends StatelessWidget {
                           .collection("users")
                           .doc(FirebaseAuth.instance.currentUser?.uid)
                           .collection("transactions")
+                          .orderBy("current_date", descending: true)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==

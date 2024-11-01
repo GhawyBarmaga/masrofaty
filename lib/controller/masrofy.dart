@@ -19,6 +19,7 @@ class MasrofyController extends GetxController {
   int totalbalance = 0;
   final TextEditingController amount = TextEditingController();
   final TextEditingController balance = TextEditingController();
+  final TextEditingController expenses = TextEditingController();
   final currentuser = FirebaseAuth.instance.currentUser?.uid;
 
   final DateTime now = DateTime.now();
@@ -58,7 +59,8 @@ class MasrofyController extends GetxController {
 //=======================Add transactions==========================================
   void addtransaction(usercurrent) async {
     try {
-      if (amount.text.isEmpty || dropdownValue.isEmpty) {
+      if (amount.text.isEmpty || expenses.text.isEmpty) {
+        Get.snackbar("تحذير", "يجب عليك تعبئة جميع الحقول");
         return;
       }
       QuerySnapshot db = await FirebaseFirestore.instance
@@ -72,7 +74,8 @@ class MasrofyController extends GetxController {
           .doc(usercurrent)
           .collection("transactions")
           .add({
-        "masrofitem": dropdownValue.toString(),
+        "masrofitem": expenses.text,
+        //"masrofitem": dropdownValue.toString(),
         "current_date": formatter.format(now),
         "amount": int.parse(amount.text)
       });

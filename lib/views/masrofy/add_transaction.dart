@@ -1,4 +1,3 @@
-
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +9,6 @@ import 'package:get/get.dart';
 import '../../controller/masrofy.dart';
 
 import '../../shared/components.dart';
-import '../../shared/dropdown_button.dart';
 
 
 class add_transaction extends StatelessWidget {
@@ -42,13 +40,13 @@ class add_transaction extends StatelessWidget {
                 onPressed: () {
                   Get.dialog(AlertDialog(actions: [
                     const SizedBox(height: 10.0),
-                    // CustomForm(
-                    //   text: " الاسم",
-                    //   type: TextInputType.name,
-                    //   name: controller.masrof,
-                    // ),
+                    CustomForm(
+                      text: " نوع المصروف",
+                      type: TextInputType.name,
+                      name: controller.expenses,
+                    ),
                     const SizedBox(height: 10.0),
-                    const MasrofItem(),
+                    // const MasrofItem(),
                     const SizedBox(height: 10.0),
                     CustomForm(
                       text: "المبلغ".tr,
