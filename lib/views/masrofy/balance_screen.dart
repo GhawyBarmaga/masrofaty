@@ -22,7 +22,7 @@ class BalanceScreen extends StatelessWidget {
         height: Get.height * .18,
         width: double.infinity,
         decoration: BoxDecoration(
-            color: HexColor("000000"),
+            color: HexColor("0e2f44"),
             borderRadius: BorderRadius.circular(20.0)),
         child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance

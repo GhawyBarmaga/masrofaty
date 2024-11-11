@@ -10,7 +10,6 @@ import '../../controller/masrofy.dart';
 
 import '../../shared/components.dart';
 
-
 class add_transaction extends StatelessWidget {
   final usercurrent;
   const add_transaction({
@@ -25,11 +24,11 @@ class add_transaction extends StatelessWidget {
       builder: (MasrofyController controller) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("اضافة المصروف".tr,
-              style: const TextStyle(
+          const Text("اضافة المصروف",
+              style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white)),
+                  color: Colors.black)),
           const SizedBox(
             width: 15.0,
           ),
@@ -70,9 +69,9 @@ class add_transaction extends StatelessWidget {
 
                               Get.back();
                             },
-                            child: Text(
-                              "اضافة المصروف".tr,
-                              style: const TextStyle(
+                            child: const Text(
+                              "اضافة المصروف",
+                              style: TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.bold),
                             )),
 

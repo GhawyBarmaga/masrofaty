@@ -146,4 +146,35 @@ class MasrofyController extends GetxController {
       log(e.toString());
     }
   }
+
+  void deletetransactionItem(id, amount) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentuser)
+          .collection("transactions")
+          .doc(id)
+          .delete();
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .update({
+        "current_balance": FieldValue.increment(amount),
+      });
+
+      update();
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  void updateTransactionItem(String? id, String? item) {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(currentuser)
+        .collection("transactions")
+        .doc(id)
+        .update({"masrofitem": item});
+    update();
+  }
 }

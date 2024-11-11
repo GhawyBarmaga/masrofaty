@@ -12,6 +12,7 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../controller/masrofy.dart';
 import '../../register/login_screen.dart';
 
+import '../../shared/components.dart';
 import 'add_transaction.dart';
 import 'balance_screen.dart';
 
@@ -21,10 +22,10 @@ class MasrofyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor("0e2f44"),
+      backgroundColor: HexColor("f5f5dc"),
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: HexColor("0e2f44"),
+        backgroundColor: HexColor("f5f5dc"),
         title: GetBuilder<MasrofyController>(
           builder: (MasrofyController controller) => TextButton(
             style: TextButton.styleFrom(
@@ -149,7 +150,7 @@ class MasrofyScreen extends StatelessWidget {
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.white)),
+                                                color: Colors.black)),
                                         const SizedBox(
                                           height: 10.0,
                                         ),
@@ -168,7 +169,84 @@ class MasrofyScreen extends StatelessWidget {
                                                 style: const TextStyle(
                                                     fontSize: 18,
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.red))
+                                                    color: Colors.red)),
+                                            const Spacer(),
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.edit,
+                                                color: Colors.green,
+                                              ),
+                                              onPressed: () {
+                                                TextEditingController item =
+                                                    TextEditingController();
+                                                item.text = snapshot.data
+                                                    ?.docs[index]["masrofitem"];
+                                                Get.dialog(
+                                                    AlertDialog(actions: [
+                                                  const SizedBox(height: 10.0),
+                                                  CustomForm(
+                                                    type: TextInputType.name,
+                                                    text: " ",
+                                                    name: item,
+                                                  ),
+                                                  const SizedBox(height: 10.0),
+                                                  Row(children: [
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                          Get.find<
+                                                                  MasrofyController>()
+                                                              .updateTransactionItem(
+                                                                  snapshot
+                                                                      .data
+                                                                      ?.docs[
+                                                                          index]
+                                                                      .id,
+                                                                  item.text);
+                                                        },
+                                                        child: const Text(
+                                                          "تعديل المصروف",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.green,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                    const Spacer(),
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                        child: const Text(
+                                                          "رجوع",
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                    const Spacer(),
+                                                  ])
+                                                ]));
+                                                //=========Alert dialog===================================
+                                              },
+                                            ),
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                Get.find<MasrofyController>()
+                                                    .deletetransactionItem(
+                                                        snapshot.data
+                                                            ?.docs[index].id,
+                                                        snapshot.data
+                                                                ?.docs[index]
+                                                            ["amount"]);
+                                              },
+                                            ),
                                           ],
                                         )
                                       ],
